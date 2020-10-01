@@ -95,6 +95,14 @@ typedef t_figure	t_circle;
 typedef t_figure	t_square;
 typedef t_figure	t_triangle;
 
+typedef struct	s_camera
+{
+	t_point		location;
+	t_vect		orientation;
+	float		fov;
+	t_vect		**ray_table;
+}				t_camera;
+
 typedef struct	s_polynome
 {
 	float		a;
@@ -113,10 +121,9 @@ typedef struct	s_scene
 	float		light_ratio;
 	t_vect		amb_light_color;
 	float		amb_light_ratio;
-	t_point		*cameras;
+	t_camera	*camera_list;
+	int			camera_count;
 	int			active_camera;
-	t_vect		cam_rotation;
-	float		fov;
 	t_figure	*figure_list;
 	int			figure_count;
 }	            t_scene;
