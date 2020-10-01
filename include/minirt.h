@@ -113,7 +113,8 @@ typedef struct	s_scene
 	float		light_ratio;
 	t_vect		amb_light_color;
 	float		amb_light_ratio;
-	t_point		camera;
+	t_point		*cameras;
+	int			active_camera;
 	t_vect		cam_rotation;
 	float		fov;
 	t_figure	*figure_list;

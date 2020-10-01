@@ -74,9 +74,9 @@ void	render_frame(t_vect **ray_table, t_scene scene, t_point start, t_r_stack st
 }
 
 #ifndef USING_SDL
-	int	interact(int keycode, void *thing)
+	int	interact(int keycode, void *param)
 	{
-		thing = 0;
+		param = 0;
 		ft_putnbr_fd(keycode, 1);
 		ft_putchar_fd('\n', 1);
 		if (keycode == 53 || keycode == 65307)
