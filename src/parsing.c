@@ -137,7 +137,7 @@ void count_res_ambient(char **lines)
             acount++;
         lines++;
     }
-	printf("rcount = %d, acount = %sd\n", rcount, acount);
+	printf("rcount = %d, acount = %d\n", rcount, acount);
 	if (rcount != 1)
 		clean_exit(1, "There must be one R argument in the scene");
 	if (acount != 1)
