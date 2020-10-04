@@ -62,7 +62,6 @@ int		main(int argc, char **argv)
 	init_win(scene);
 	init_buffers(scene);
 	stack = create_stack(MAX_RECURSION_DEPTH + 69, 1);
-	g_win.buffer = (int*)mlx_get_data_addr(g_win.img, &g_win.bpp, &g_win.s_l, &g_win.endian);
 	clock_t begin = clock();
 
 	render_frame(scene);
