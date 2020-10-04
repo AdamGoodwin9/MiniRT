@@ -58,8 +58,11 @@ int		main(int argc, char **argv)
 	add_drawable(&drawables, "sq", create_square);
 	add_drawable(&drawables, "tr", create_triangle);
 	scene = parse_scene(argv[1], drawables);
+	printf("A");
 	init_ray_tables(scene);
+	printf("B");
 	init_win(scene);
+	printf("C");
 	init_buffers(scene);
 	stack = create_stack(MAX_RECURSION_DEPTH + 69, 1);
 	clock_t begin = clock();
