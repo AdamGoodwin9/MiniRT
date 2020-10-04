@@ -115,11 +115,11 @@ void	render_frame(t_scene scene)
 		double one_over_gamma;
 		int *buf;
 
-		printf("1");
+		printf("1\n");
 		buf = (int*)mlx_get_data_addr(g_win.img, &g_win.bpp, &g_win.s_l, &g_win.endian);
 		one_over_gamma = 1 / SCREEN_GAMMA;
 		i = -1;
-		printf("2");
+		printf("2\n");
 		while (++i < (int)scene.resolution.y)
 		{
 			j = -1;
@@ -129,7 +129,7 @@ void	render_frame(t_scene scene)
 				buf[j + i * (int)scene.resolution.y] = gamma_corrected(color, one_over_gamma);
 			}
 		}
-		printf("3");
+		printf("3\n");
 		return (buf);
 	}
 
