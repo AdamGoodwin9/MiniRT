@@ -115,7 +115,7 @@ void	render_frame(t_scene scene)
 		double one_over_gamma;
 		int *buf;
 
-		buf = malloc(sizeof(int) * scene.resolution.x * scene.resolution.y * 10);
+		buf = malloc(sizeof(int) * scene.resolution.x * scene.resolution.y);
 		one_over_gamma = 1 / SCREEN_GAMMA;
 		i = -1;
 		while (++i < (int)scene.resolution.y)
@@ -141,11 +141,6 @@ void	render_frame(t_scene scene)
 			j = -1;
 			while (++j < (int)scene.resolution.x)
 			{
-				printf("A\n");
-				printf("active camera: %d\n", scene.active_camera);
-				printf("B\n");
-				printf("camera thing: %p\n", scene.camera_list[scene.active_camera].buf);
-				printf("C\n");
 				g_win.buffer[j + i * (int)scene.resolution.y] = scene.camera_list[scene.active_camera].buf[j + i * (int)scene.resolution.y];
 			}
 		}
