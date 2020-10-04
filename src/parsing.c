@@ -137,7 +137,6 @@ void count_res_ambient(char **lines)
             acount++;
         lines++;
     }
-	printf("rcount = %d, acount = %d\n", rcount, acount);
 	if (rcount != 1)
 		clean_exit(1, "There must be one R argument in the scene");
 	if (acount != 1)
@@ -309,6 +308,7 @@ static t_scene build_scene(t_scene scene, char **lines, t_drawable *drawables)
 	if (!(scene.figure_list = 
 		(t_figure*)malloc(sizeof(t_figure) * scene.figure_count)))
         clean_exit(1, "Failed to build scene, malloc failed");
+	scene.active_camera = 0;
 	scene.camera_count = count_cameras(lines);
 	count_res_ambient(lines);
 	if (!(scene.camera_list = 
