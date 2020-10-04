@@ -41,6 +41,7 @@ void init_buffers(t_scene scene)
 
 int		main(int argc, char **argv)
 {
+	printf("Z");
 	t_scene		scene;
 	t_drawable	*drawables;
 
