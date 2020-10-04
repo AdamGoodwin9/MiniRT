@@ -50,6 +50,7 @@ int		main(int argc, char **argv)
 		return (0);
 	}
 	drawables = NULL;
+	printf("X");
 	add_drawable(&drawables, "sp", create_sphere);
 	add_drawable(&drawables, "pl", create_plane);
 	add_drawable(&drawables, "hcy", create_hcyl);
@@ -57,6 +58,7 @@ int		main(int argc, char **argv)
 	add_drawable(&drawables, "cy", create_cyl);
 	add_drawable(&drawables, "sq", create_square);
 	add_drawable(&drawables, "tr", create_triangle);
+	printf("Y");
 	scene = parse_scene(argv[1], drawables);
 	printf("A");
 	init_ray_tables(scene);
