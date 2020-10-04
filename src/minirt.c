@@ -17,7 +17,7 @@ void init_ray_tables(t_scene scene)
 {
 	while (scene.active_camera < scene.camera_count)
 	{
-		scene.camera_list[scene.active_camera] = init_tracer(scene);
+		scene.camera_list[scene.active_camera].ray_table = init_tracer(scene);
 		scene.active_camera++;
 	}
 	scene.active_camera = 0;
