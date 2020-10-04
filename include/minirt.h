@@ -23,6 +23,8 @@
 # define ZERO_FLOAT_PRECISION 0.0001
 # define MAX_PARSE_FIGURE_ARGUMENTS 20
 # define MAX_FIGURE_NAME_LENGTH 10
+# define LEFT_ARROW 65361
+# define RIGHT_ARROW 65363
 
 
 typedef struct	s_point

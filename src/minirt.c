@@ -36,8 +36,9 @@ int		main(int argc, char **argv)
 	add_drawable(&drawables, "sq", create_square);
 	add_drawable(&drawables, "tr", create_triangle);
 	scene = parse_scene(argv[1], drawables);
-	start = scene.camera;
+	start = scene.camera_list[scene.active_camera].location;
 	ray_table = init_tracer(scene);
+	scene.camera_list[scene.active_camera].ray_table = ray_table;
 	init_win(scene);
 	stack = create_stack(MAX_RECURSION_DEPTH + 69, 1);
 	clock_t begin = clock();
