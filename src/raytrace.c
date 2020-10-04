@@ -137,12 +137,7 @@ int		trace_ray(t_vect ray, t_scene scene, t_point start, int prev_index, int ign
 	}
 	if (closest_distance < RENDER_DISTANCE)
 	{
-		printf("A\n");
-		printf("scene.figure_list[index].is_reflective: %f\n", scene.figure_list[index].is_reflective);
-		printf("B\n");
-		printf("peek_index(stack): %f", peek_index(stack));
-		printf("C\n");
-		if (scene.figure_list[index].is_reflective > 0 && index != peek_index(stack))
+		if (scene.figure_list[index].is_reflective > 0)
 		{
 			reflected_dir = get_reflective_vector(scene.figure_list[index], closest_intersection, ray, start);
 			modified_start = add(closest_intersection, scale(reflected_dir, EPSILON));
