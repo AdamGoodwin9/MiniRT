@@ -125,10 +125,11 @@ void	render_frame(t_scene scene)
 			j = -1;
 			while (++j < (int)scene.resolution.x)
 			{
+				printf("i is %d j is %d\n", i, j);
 				color = trace_ray(ray_table[i][j], scene, start, -1, 0, stack);
-				printf("X\n");
+				printf("B\n");
 				buf[i + j * (int)scene.resolution.y] = gamma_corrected(color, one_over_gamma);
-				printf("Y\n");
+				printf("C\n");
 			}
 		}
 		printf("3\n");
