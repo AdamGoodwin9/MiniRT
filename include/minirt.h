@@ -224,7 +224,7 @@ t_vect		add(t_vect v1, t_vect v2);
 float		dot(t_point v1, t_point v2);
 float		distance(t_point p1, t_point p2);
 t_vect 		projection(t_vect u, t_vect base);
-void		render_frame(t_vect **ray_table, t_scene scene, t_point start, t_r_stack stack);
+void		render_frame(t_scene scene);
 t_vect		**init_tracer(t_scene scene);
 t_vect		scale(t_vect v, float scalar);
 int			figure_eclipses_light(t_vect inter, t_figure shape, t_vect light);
@@ -256,7 +256,7 @@ int			trace_ray(t_vect ray, t_scene scene, t_point start, int	prev_index, int ig
 double		angle(t_vect v1, t_vect v2);
 
 void		mlx_init_win(t_scene scene);
-void		mlx_render_frame(t_vect **ray_table, t_scene scene, t_point start, t_r_stack stack);
+void		mlx_render_frame(t_scene scene);
 int			*get_buffer(t_vect **ray_table, t_scene scene, t_point start, t_r_stack stack);
 
 #endif
