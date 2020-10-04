@@ -41,7 +41,7 @@ void init_buffers(t_scene scene)
 
 int		main(int argc, char **argv)
 {
-	printf("Z");
+	printf("Z\n");
 	t_scene		scene;
 	t_drawable	*drawables;
 
@@ -51,7 +51,7 @@ int		main(int argc, char **argv)
 		return (0);
 	}
 	drawables = NULL;
-	printf("X");
+	printf("X\n");
 	add_drawable(&drawables, "sp", create_sphere);
 	add_drawable(&drawables, "pl", create_plane);
 	add_drawable(&drawables, "hcy", create_hcyl);
@@ -59,13 +59,13 @@ int		main(int argc, char **argv)
 	add_drawable(&drawables, "cy", create_cyl);
 	add_drawable(&drawables, "sq", create_square);
 	add_drawable(&drawables, "tr", create_triangle);
-	printf("Y");
+	printf("Y\n");
 	scene = parse_scene(argv[1], drawables);
-	printf("A");
+	printf("A\n");
 	init_ray_tables(scene);
-	printf("B");
+	printf("B\n");
 	init_win(scene);
-	printf("C");
+	printf("C\n");
 	init_buffers(scene);
 	stack = create_stack(MAX_RECURSION_DEPTH + 69, 1);
 	clock_t begin = clock();
