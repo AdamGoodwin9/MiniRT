@@ -63,10 +63,10 @@ void	init_win(t_scene scene)
 	#endif
 }
 
-void	render_frame(t_vect **ray_table, t_scene scene, t_point start, t_r_stack stack)
+void	render_frame(t_scene scene)
 {
 	#ifndef USING_SDL
-		mlx_render_frame(ray_table, scene, start, stack);
+		mlx_render_frame(scene);
 	#endif
 	#ifdef USING_SDL
 		sdl_render_frame(ray_table, scene, start, stack);
@@ -74,14 +74,6 @@ void	render_frame(t_vect **ray_table, t_scene scene, t_point start, t_r_stack st
 }
 
 #ifndef USING_SDL
-	void rerender(t_scene scene)
-	{
-		t_camera c;
-
-		c = scene.camera_list[scene.active_camera];
-		render_frame(c.ray_table, scene, c.location, stack);
-	}
-
 	int	interact(int keycode, void *param)
 	{
 		t_scene *scene;
@@ -93,13 +85,13 @@ void	render_frame(t_vect **ray_table, t_scene scene, t_point start, t_r_stack st
 		{
 			if (--scene->active_camera == -1)
 				scene->active_camera = scene->camera_count - 1;
-			rerender(*scene);
+			render_frame(*scene);
 		}
 		if (keycode == RIGHT_ARROW && scene->camera_count != 1)
 		{
 			if (++scene->active_camera == scene->camera_count)
 				scene->active_camera = 0;
-			rerender(*scene);
+			render_frame(*scene);
 		}
 		if (keycode == 53 || keycode == ESC)
 			exit(0);
@@ -137,7 +129,7 @@ void	render_frame(t_vect **ray_table, t_scene scene, t_point start, t_r_stack st
 		}
 	}
 
-	void	mlx_render_frame(t_vect **ray_table, t_scene scene, t_point start, t_r_stack stack)
+	void	mlx_render_frame(t_scene scene)
 	{
 		g_win.buffer = scene.camera_list[scene.active_camera].buf;
 		mlx_put_image_to_window(g_win.mlx, g_win.win, g_win.img, 0, 0);
