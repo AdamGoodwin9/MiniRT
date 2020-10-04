@@ -141,7 +141,9 @@ void	render_frame(t_scene scene)
 			j = -1;
 			while (++j < (int)scene.resolution.x)
 			{
+				printf("A\n");
 				g_win.buffer[j + i * (int)scene.resolution.y] = scene.camera_list[scene.active_camera].buf[j + i * (int)scene.resolution.y];
+				printf("B\n");
 			}
 		}
 		mlx_put_image_to_window(g_win.mlx, g_win.win, g_win.img, 0, 0);
