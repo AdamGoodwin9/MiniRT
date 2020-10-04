@@ -13,6 +13,15 @@
 #include "minirt.h"
 #include <time.h>
 
+void init_ray_tables(t_scene scene)
+{
+	while (scene.active_camera < scene.camera_count)
+	{
+		scene.camera_list[scene.active_camera] = init_tracer(scene);
+		scene.active_camera++;
+	}
+	scene.active_camera = 0;
+}
 
 int		main(int argc, char **argv)
 {
@@ -36,8 +45,8 @@ int		main(int argc, char **argv)
 	add_drawable(&drawables, "tr", create_triangle);
 	scene = parse_scene(argv[1], drawables);
 	start = scene.camera_list[0].location;
-	ray_table = init_tracer(scene);
-	scene.camera_list[0].ray_table = ray_table;
+	init_ray_tables(scene);
+	ray_table = scene.camera_list[0].ray_table;
 	init_win(scene);
 	stack = create_stack(MAX_RECURSION_DEPTH + 69, 1);
 	clock_t begin = clock();
