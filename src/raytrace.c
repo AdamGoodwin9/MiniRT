@@ -66,8 +66,9 @@ t_vect	**init_tracer(t_scene scene)
 		}
 	}
 	def_rot = new_vect(0, 0, 1);
-	float theta = acos(dot(def_rot, scene.cam_rotation) / (norm(def_rot) * norm(scene.cam_rotation))); 
-	ray_table = turn_ray_table(ray_table, scene, cross(def_rot, scene.cam_rotation), theta);
+	i = scene.active_camera;
+	float theta = acos(dot(def_rot, scene.camera_list[i].orientation) / (norm(def_rot) * norm(scene.camera_list[i].orientation))); 
+	ray_table = turn_ray_table(ray_table, scene, cross(def_rot, scene.camera_list[i].orientation), theta);
 	return (ray_table);
 }
 
