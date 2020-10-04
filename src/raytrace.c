@@ -140,13 +140,11 @@ int		trace_ray(t_vect ray, t_scene scene, t_point start, int prev_index, int ign
 		printf("A\n");
 		if (scene.figure_list[index].is_reflective > 0 && index != peek_index(stack))
 		{
-			reflected_dir = get_reflective_vector(scene.figure_list[index], closest_intersection, ray, start);
 			printf("B\n");
+			reflected_dir = get_reflective_vector(scene.figure_list[index], closest_intersection, ray, start);
 			modified_start = add(closest_intersection, scale(reflected_dir, EPSILON));
-			printf("C\n");
 			reflective_color = trace_ray(reflected_dir, scene, modified_start, index, 0, stack);
 		}
-		printf("D\n");
 		lum_intensity = get_lum_intensity(scene.figure_list[index], closest_intersection, scene.spotlight, start);
 		lum_intensity = (1 - scene.amb_light_ratio) * lum_intensity + scene.amb_light_ratio;
 		i = -1;
