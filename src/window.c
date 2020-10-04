@@ -86,7 +86,7 @@ void	render_frame(t_vect **ray_table, t_scene scene, t_point start, t_r_stack st
 	{
 		t_scene scene;
 
-		scene = (t_scene)param;
+		scene = *(t_scene*)param;
 		ft_putnbr_fd(keycode, 1);
 		ft_putchar_fd('\n', 1);
 		if (keycode == LEFT_ARROW && scene.camera_count != 1)
