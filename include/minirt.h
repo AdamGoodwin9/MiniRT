@@ -25,6 +25,7 @@
 # define MAX_FIGURE_NAME_LENGTH 10
 # define LEFT_ARROW 65361
 # define RIGHT_ARROW 65363
+# define ESC 65307
 
 
 typedef struct	s_point

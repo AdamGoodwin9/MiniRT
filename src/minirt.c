@@ -50,7 +50,7 @@ int		main(int argc, char **argv)
 	printf("Time Elapsed: %lf\n", time_spent);
 	
 	#ifndef USING_SDL
-		mlx_key_hook(g_win.win, interact, NULL);
+		mlx_key_hook(g_win.win, interact, scene);
 		mlx_loop(g_win.mlx);
 	#endif
 	#ifdef USING_SDL

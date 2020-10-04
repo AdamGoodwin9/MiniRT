@@ -76,10 +76,22 @@ void	render_frame(t_vect **ray_table, t_scene scene, t_point start, t_r_stack st
 #ifndef USING_SDL
 	int	interact(int keycode, void *param)
 	{
-		param = 0;
+		t_scene scene;
+
+		scene = (t_scene)param;
 		ft_putnbr_fd(keycode, 1);
 		ft_putchar_fd('\n', 1);
-		if (keycode == 53 || keycode == 65307)
+		if (keycode == LEFT_ARROW && scene.camera_count != 1)
+		{
+			if (--scene.active_camera == -1)
+				scene.active_camera = scene.camera_count - 1;
+		}
+		if (keycode == RIGHT_ARROW && scene.camera_count != 1)
+		{
+			if (++scene.active_camera == scene.camera_count)
+				scene.active_camera = 0;
+		}
+		if (keycode == 53 || keycode == ESC)
 			exit(0);
 		return (0);
 	}
