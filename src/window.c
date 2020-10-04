@@ -105,6 +105,7 @@ void	render_frame(t_vect **ray_table, t_scene scene, t_point start, t_r_stack st
 			printf("after scene.active_camera = %d\n", scene.active_camera);
 			rerender(scene);
 		}
+		*param = scene;
 		if (keycode == 53 || keycode == ESC)
 			exit(0);
 		return (0);
