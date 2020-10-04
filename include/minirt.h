@@ -159,6 +159,7 @@ typedef struct	s_drawable
 	}				t_window;
 
 	t_window	g_win;
+	t_r_stack	stack;
 # endif
 
 # ifdef USING_SDL

@@ -74,6 +74,14 @@ void	render_frame(t_vect **ray_table, t_scene scene, t_point start, t_r_stack st
 }
 
 #ifndef USING_SDL
+	void rerender(t_scene scene)
+	{
+		t_camera c;
+
+		c = scene.camera_list[scene.active_camera];
+		render_frame(c.ray_table, scene, c.location, stack);
+	}
+
 	int	interact(int keycode, void *param)
 	{
 		t_scene scene;
@@ -85,11 +93,13 @@ void	render_frame(t_vect **ray_table, t_scene scene, t_point start, t_r_stack st
 		{
 			if (--scene.active_camera == -1)
 				scene.active_camera = scene.camera_count - 1;
+			rerender(scene);
 		}
 		if (keycode == RIGHT_ARROW && scene.camera_count != 1)
 		{
 			if (++scene.active_camera == scene.camera_count)
 				scene.active_camera = 0;
+			rerender(scene);
 		}
 		if (keycode == 53 || keycode == ESC)
 			exit(0);
