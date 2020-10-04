@@ -127,6 +127,7 @@ void	render_frame(t_scene scene)
 				buf[j + i * (int)scene.resolution.y] = gamma_corrected(color, one_over_gamma);
 			}
 		}
+		return (buf);
 	}
 
 	void	mlx_render_frame(t_scene scene)
