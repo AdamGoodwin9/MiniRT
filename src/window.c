@@ -91,14 +91,18 @@ void	render_frame(t_vect **ray_table, t_scene scene, t_point start, t_r_stack st
 		ft_putchar_fd('\n', 1);
 		if (keycode == LEFT_ARROW && scene.camera_count != 1)
 		{
+			printf("before: scene.active_camera = %d\n", scene.active_camera);
 			if (--scene.active_camera == -1)
 				scene.active_camera = scene.camera_count - 1;
+			printf("after scene.active_camera = %d\n", scene.active_camera);
 			rerender(scene);
 		}
 		if (keycode == RIGHT_ARROW && scene.camera_count != 1)
 		{
+			printf("before: scene.active_camera = %d\n", scene.active_camera);
 			if (++scene.active_camera == scene.camera_count)
 				scene.active_camera = 0;
+			printf("after scene.active_camera = %d\n", scene.active_camera);
 			rerender(scene);
 		}
 		if (keycode == 53 || keycode == ESC)
