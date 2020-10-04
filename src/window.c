@@ -115,24 +115,18 @@ void	render_frame(t_scene scene)
 		double one_over_gamma;
 		int *buf;
 
-		printf("1\n");
 		buf = malloc(sizeof(int) * scene.resolution.x * scene.resolution.y);
 		one_over_gamma = 1 / SCREEN_GAMMA;
 		i = -1;
-		printf("2\n");
 		while (++i < (int)scene.resolution.y)
 		{
 			j = -1;
 			while (++j < (int)scene.resolution.x)
 			{
-				print_vect(ray_table[i][j], "ray is ");
 				color = trace_ray(ray_table[i][j], scene, start, -1, 0, stack);
-				printf("B\n");
 				buf[i + j * (int)scene.resolution.y] = gamma_corrected(color, one_over_gamma);
-				printf("C\n");
 			}
 		}
-		printf("3\n");
 		return (buf);
 	}
 

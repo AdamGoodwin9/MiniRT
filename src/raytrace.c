@@ -122,6 +122,7 @@ int		trace_ray(t_vect ray, t_scene scene, t_point start, int prev_index, int ign
 	}
 	closest_distance = RENDER_DISTANCE;
 	i = -1;
+	printf("A\n");
 	while (++i < scene.figure_count)
 	{
 		if (i == prev_index && ignore)
@@ -135,6 +136,7 @@ int		trace_ray(t_vect ray, t_scene scene, t_point start, int prev_index, int ign
 			closest_intersection = intersection;
 		}
 	}
+	printf("B\n");
 	if (closest_distance < RENDER_DISTANCE)
 	{
 		if (scene.figure_list[index].is_reflective > 0 && index != peek_index(stack))
@@ -156,6 +158,7 @@ int		trace_ray(t_vect ray, t_scene scene, t_point start, int prev_index, int ign
 				break;
 			}
 		}
+		printf("C\n");
 		current_recursion_depth--;
 		return (filter_color(color_shade(lum_intensity, scene.figure_list[index], reflective_color), scene.adj_light_color));
 	}
