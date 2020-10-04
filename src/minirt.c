@@ -21,8 +21,6 @@ void init_ray_tables(t_scene scene)
 		scene.active_camera++;
 	}
 	scene.active_camera = 0;
-
-	return (scene);
 }
 
 void init_buffers(t_scene scene)
