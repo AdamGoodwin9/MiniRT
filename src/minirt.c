@@ -23,6 +23,22 @@ void init_ray_tables(t_scene scene)
 	scene.active_camera = 0;
 }
 
+void init_buffers(t_scene scene)
+{
+	int i;
+	t_camera c;
+
+	i = 0;
+	while (i < scene.camera_count)
+	{
+		scene.active_camera = i;
+		c = scene.camera_list[i];
+		c.buf = get_buffer(c.ray_table, scene, c.location, stack);
+		scene.active_camera++;
+	}
+	scene.active_camera = 0;
+}
+
 int		main(int argc, char **argv)
 {
 	t_vect		**ray_table;
@@ -48,6 +64,7 @@ int		main(int argc, char **argv)
 	init_ray_tables(scene);
 	ray_table = scene.camera_list[0].ray_table;
 	init_win(scene);
+	init_buffers(scene);
 	stack = create_stack(MAX_RECURSION_DEPTH + 69, 1);
 	clock_t begin = clock();
 

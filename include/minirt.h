@@ -104,6 +104,7 @@ typedef struct	s_camera
 	t_vect		orientation;
 	float		fov;
 	t_vect		**ray_table;
+	int			*buf;
 }				t_camera;
 
 typedef struct	s_polynome
@@ -256,5 +257,6 @@ double		angle(t_vect v1, t_vect v2);
 
 void		mlx_init_win(t_scene scene);
 void		mlx_render_frame(t_vect **ray_table, t_scene scene, t_point start, t_r_stack stack);
+int			*get_buffer(t_vect **ray_table, t_scene scene, t_point start, t_r_stack stack);
 
 #endif

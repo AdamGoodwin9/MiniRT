@@ -115,13 +115,15 @@ void	render_frame(t_vect **ray_table, t_scene scene, t_point start, t_r_stack st
 		g_win.buffer = (int*)mlx_get_data_addr(g_win.img, &g_win.bpp, &g_win.s_l, &g_win.endian);
 	}
 
-	void	mlx_render_frame(t_vect **ray_table, t_scene scene, t_point start, t_r_stack stack)
+	int		*get_buffer(t_vect **ray_table, t_scene scene, t_point start, t_r_stack stack)
 	{
 		int	i;
 		int	j;
 		int color;
 		double one_over_gamma;
+		int *buf;
 
+		buf = (int*)mlx_get_data_addr(g_win.img, &g_win.bpp, &g_win.s_l, &g_win.endian);
 		one_over_gamma = 1 / SCREEN_GAMMA;
 		i = -1;
 		while (++i < (int)scene.resolution.y)
@@ -130,10 +132,14 @@ void	render_frame(t_vect **ray_table, t_scene scene, t_point start, t_r_stack st
 			while (++j < (int)scene.resolution.x)
 			{
 				color = trace_ray(ray_table[i][j], scene, start, -1, 0, stack);
-				g_win.buffer[j + i * (int)scene.resolution.y] = gamma_corrected(color, one_over_gamma);
+				buf[j + i * (int)scene.resolution.y] = gamma_corrected(color, one_over_gamma);
 			}
 		}
-		
+	}
+
+	void	mlx_render_frame(t_vect **ray_table, t_scene scene, t_point start, t_r_stack stack)
+	{
+		g_win.buffer = scene.camera_list[scene.active_camera].buf;
 		mlx_put_image_to_window(g_win.mlx, g_win.win, g_win.img, 0, 0);
 	}
 #endif
