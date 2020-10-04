@@ -115,7 +115,7 @@ void	render_frame(t_scene scene)
 		double one_over_gamma;
 		int *buf;
 
-		buf = (int*)mlx_get_data_addr(g_win.img, &g_win.bpp, &g_win.s_l, &g_win.endian);
+		buf = malloc(sizeof(int) * scene.resolution.x * scene.resolution.y);
 		one_over_gamma = 1 / SCREEN_GAMMA;
 		i = -1;
 		while (++i < (int)scene.resolution.y)
@@ -132,7 +132,18 @@ void	render_frame(t_scene scene)
 
 	void	mlx_render_frame(t_scene scene)
 	{
-		g_win.buffer = scene.camera_list[scene.active_camera].buf;
+		int i;
+		int j;
+
+		i = -1;
+		while (++i < (int)scene.resolution.y)
+		{
+			j = -1;
+			while (++j < (int)scene.resolution.x)
+			{
+				g_win.buffer[j + i * (int)scene.resolution.y] = scene.camera_list[scene.active_camera].buf[j + i * (int)scene.resolution.y];
+			}
+		}
 		mlx_put_image_to_window(g_win.mlx, g_win.win, g_win.img, 0, 0);
 	}
 #endif
