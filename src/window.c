@@ -115,7 +115,7 @@ void	render_frame(t_scene scene)
 		double one_over_gamma;
 		int *buf;
 
-		buf = malloc(sizeof(int) * scene.resolution.x * scene.resolution.y);
+		buf = malloc(sizeof(int) * scene.resolution.x * scene.resolution.y * 10);
 		one_over_gamma = 1 / SCREEN_GAMMA;
 		i = -1;
 		while (++i < (int)scene.resolution.y)
