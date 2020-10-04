@@ -34,7 +34,7 @@ void init_buffers(t_scene scene)
 		scene.active_camera = i;
 		c = scene.camera_list[i];
 		c.buf = get_buffer(c.ray_table, scene, c.location, stack);
-		scene.active_camera++;
+		i++;
 	}
 	scene.active_camera = 0;
 }
