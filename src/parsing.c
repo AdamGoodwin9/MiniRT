@@ -131,9 +131,9 @@ void count_res_ambient(char **lines)
 	acount = 0;
     while(*lines)
     {
-        if (ft_indexof((*lines)[0], "R") && ft_indexof((*lines)[1], " \t") > -1)
+        if ((*lines)[0] == 'R' && ft_indexof((*lines)[1], " \t") > -1)
             rcount++;
-		if (ft_indexof((*lines)[0], "A") && ft_indexof((*lines)[1], " \t") > -1)
+		if ((*lines)[0] == 'A' && ft_indexof((*lines)[1], " \t") > -1)
             acount++;
         lines++;
     }
