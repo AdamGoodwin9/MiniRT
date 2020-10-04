@@ -21,6 +21,8 @@ void init_ray_tables(t_scene scene)
 		scene.active_camera++;
 	}
 	scene.active_camera = 0;
+
+	return (scene);
 }
 
 void init_buffers(t_scene scene)
@@ -34,7 +36,7 @@ void init_buffers(t_scene scene)
 		scene.active_camera = i;
 		c = scene.camera_list[i];
 		c.buf = get_buffer(c.ray_table, scene, c.location, stack);
-		printf("camera #%d is at %p\n", i, c.buf);
+		scene.camera_list[i] = c;
 		i++;
 	}
 	scene.active_camera = 0;
