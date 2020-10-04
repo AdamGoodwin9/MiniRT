@@ -124,7 +124,7 @@ void	render_frame(t_scene scene)
 			while (++j < (int)scene.resolution.x)
 			{
 				color = trace_ray(ray_table[i][j], scene, start, -1, 0, stack);
-				buf[i + j * (int)scene.resolution.y] = gamma_corrected(color, one_over_gamma);
+				buf[j + i * (int)scene.resolution.y] = gamma_corrected(color, one_over_gamma);
 			}
 		}
 		return (buf);
