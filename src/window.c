@@ -116,7 +116,7 @@ void	render_frame(t_scene scene)
 		int *buf;
 
 		printf("1\n");
-		buf = (int*)mlx_get_data_addr(g_win.img, &g_win.bpp, &g_win.s_l, &g_win.endian);
+		buf = malloc(sizeof(int) * scene.resolution.x * scene.resolution.y);
 		one_over_gamma = 1 / SCREEN_GAMMA;
 		i = -1;
 		printf("2\n");
