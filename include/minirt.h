@@ -104,10 +104,7 @@ typedef struct	s_camera
 	t_vect		orientation;
 	float		fov;
 	t_vect		**ray_table;
-<<<<<<< HEAD
-=======
 	int			*buf;
->>>>>>> master
 }				t_camera;
 
 typedef struct	s_polynome
