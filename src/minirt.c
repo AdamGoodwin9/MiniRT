@@ -52,13 +52,13 @@ t_scene	parse_console_args(t_scene scene, int argc, char **argv)
 	{
 		if (name_cmp("--save", argv[i]) == 0)
 		{
-			ft_putstr_fd("Scene will be saved\n");
+			ft_putstr_fd("Scene will be saved\n", 1);
 			scene.save_to_file = 1;
 		}
 		if (name_cmp("-a", argv[i]) == 0)
 		{
 			scene.animate = 1;
-			ft_putstr_fd("Scene will be animated\n");
+			ft_putstr_fd("Scene will be animated\n", 1);
 			if (i + 1 < argc && ft_isdigit(argv[i + 1][0]))
 			{
 				scene.frame_duration = FRAME_DURATION_UNIT * ft_atoi(argv[i + 1]);
