@@ -125,8 +125,8 @@ void	render_frame(t_scene scene)
 			t = 0;
 			if (++scene->active_camera == scene->camera_count)
 				scene->active_camera = 0;
-			render_frame(*scene);
 		}
+		render_frame(*scene);
 		return (0);
 	}
 

@@ -68,6 +68,11 @@ t_scene	parse_console_args(t_scene scene, int argc, char **argv)
 	return (scene);
 }
 
+int		exit_hook()
+{
+	exit(0);
+}
+
 int		main(int argc, char **argv)
 {
 	t_scene		scene;
@@ -100,9 +105,11 @@ int		main(int argc, char **argv)
 	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 	printf("Time Elapsed: %lf\n", time_spent);
 	#ifndef USING_SDL
+		mlx_hook(g_win.win, 33, 0, exit_hook, NULL);
 		mlx_loop_hook(g_win.mlx, loop, (void*)&scene);
 		mlx_key_hook(g_win.win, interact, (void*)&scene);
 		mlx_loop(g_win.mlx);
+
 	#endif
 	#ifdef USING_SDL
 		while (1)
