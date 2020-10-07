@@ -53,7 +53,6 @@ t_vect	**init_tracer(t_scene scene)
 	step.x = ((end.x - start.x) / (float)scene.resolution.x);
 	step.y = ((end.y - start.y) / (float)scene.resolution.y);
 	i = -1;
-	printf("F\n");
 
 	while (++i < scene.resolution.y)
 	{

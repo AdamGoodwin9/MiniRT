@@ -120,7 +120,7 @@ typedef struct	s_polynome
 
 typedef struct	s_scene
 {
-	char		scene_name[MAX_FILE_NAME_SIZE];
+	char		*scene_name;
 	t_vect		resolution;
 	t_point		spotlight;
 	t_vect		light_color;

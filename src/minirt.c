@@ -15,6 +15,7 @@
 
 void init_ray_tables(t_scene scene)
 {
+	printf("asdad\n");
 	while (scene.active_camera < scene.camera_count)
 	{
 		printf("E\n");
@@ -95,7 +96,7 @@ int		main(int argc, char **argv)
 	add_drawable(&drawables, "tr", create_triangle);
 	scene = parse_scene(argv[1], drawables);
 	scene = parse_console_args(scene, argc, argv);
-	ft_memmove(scene.scene_name, argv[1], ft_min(ft_strlen(argv[1]) + 1, MAX_FILE_NAME_SIZE));
+	scene.scene_name = argv[1];
 	scene.scene_name[MAX_FILE_NAME_SIZE - 1] = 0;
 	printf("D\n");
 	init_ray_tables(scene);
