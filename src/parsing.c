@@ -154,6 +154,7 @@ int count_cameras(char **lines)
             count++;
         lines++;
     }
+	printf("adsdsa count = %d\n", count);
 	if (count == 0)
 		clean_exit(1, "No cameras found in the scene.");
     return (count);
