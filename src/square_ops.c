@@ -60,8 +60,10 @@ t_square	create_square(t_parse_args parsed)
 
 t_point     square_intersection(t_square square, t_vect ray, t_point start)
 {
-    t_vect        result;
-    t_vect      u;
+    t_vect     	result;
+    t_vect     	u;
+	t_vect		width;
+	t_vect		height;
     double      r1;
 
     result.x = RENDER_DISTANCE;
@@ -76,7 +78,14 @@ t_point     square_intersection(t_square square, t_vect ray, t_point start)
     result.y = r1 * ray.y + start.y;
     result.z = r1 * ray.z + start.z;
     u = subtract(result, square.center);
-    if (!(norm_inf(u) < square.length))
+    if (square.normal.x != 0)
+		width = normalize(new_vect((square.normal.y + square.normal.z) / square.normal.x, -1, -1));
+	else if (square.normal.y != 0)
+		width = normalize(new_vect((square.normal.x + square.normal.z) / square.normal.y, -1, -1));
+	else
+		width = normalize(new_vect((square.normal.y + square.normal.x) / square.normal.z, -1, -1));
+	height = cross(square.normal, width);
+	if (!(dot(u, width) < square.length && dot(u, width) > 0 && dot(u, height) < square.length && dot(u, height) > 0))
     {
       result.x = RENDER_DISTANCE;
       result.y = RENDER_DISTANCE;
