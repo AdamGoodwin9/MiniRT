@@ -6,43 +6,52 @@
 /*   By: ede-thom <ede-thom@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 19:29:35 by ede-thom          #+#    #+#             */
-/*   Updated: 2019/12/08 15:22:53 by ede-thom         ###   ########.fr       */
+/*   Updated: 2020/10/08 18:44:04 by ede-thom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
 #include "minirt.h"
 
+
 char	*build_str_name(char *radical, int f_no, int cam_no)
 {
 	char	*ret;
 	char	*tmp;
 	int		cur;
+	size_t	size;
 
-	if (!(ret = (char*)malloc(sizeof(char) * (ft_strlen(radical) + (int)(log10(f_no * cam_no + 1) + 2)))))
+	size = sizeof(char) * (10 + ft_strlen(radical) + (int)(log10(f_no * cam_no + 1) + 2));
+	if (!(ret = (char*)malloc(size)))
 		clean_exit(1, "Malloc failed lmao");
-	ft_memmove(ret, radical, ft_strlen(radical) + 1);
+	ft_strlcpy(ret, radical, ft_strlen(radical));
+	//ft_memmove(ret, radical, ft_strlen(radical) + 1);
 	cur = ft_indexof('.', ret) > -1 ? ft_indexof('.', ret) : ft_strlen(ret);
+	ret[cur] = '\0';
 
-	ft_memmove(ret + cur, "_", 2);
+	ft_strlcpy(ret + cur, "_", ft_strlen(radical) - cur);	
+	//ft_memmove(ret + cur, "_", 2);
 	cur = ft_strlen(ret);
 	
 	if (!(tmp = ft_itoa(f_no)))
 		clean_exit(1, "Malloc failed lmao");
-	ft_memmove(ret + cur, tmp, ft_strlen(tmp) + 1);
+	ft_strlcpy(ret + cur, tmp, ft_strlen(radical) - cur);	
 	cur = ft_strlen(ret);
 	free(tmp);
 
-	ft_memmove(ret + cur, "_cam", 5);
+	ft_strlcpy(ret + cur, "_cam", ft_strlen(radical) - cur);		
+	//ft_memmove(ret + cur, "_cam", 5);
 	cur = ft_strlen(ret);
 
 	if (!(tmp = ft_itoa(cam_no)))
 		clean_exit(1, "Malloc failed lmao");
-	ft_memmove(ret + cur, tmp, ft_strlen(tmp) + 1);
+	ft_strlcpy(ret + cur, tmp, ft_strlen(radical) - cur);	
+	//ft_memmove(ret + cur, tmp, ft_strlen(tmp) + 1);
 	cur = ft_strlen(ret);
 	free(tmp);
 
-	ft_memmove(ret + cur, ".bmp", 5);
+	ft_strlcpy(ret + cur, ".bmp", ft_strlen(radical) - cur);		
+	//ft_memmove(ret + cur, ".bmp", 5);
 	cur = ft_strlen(ret);
 	ret[cur] = '\0';
 	return (ret);
