@@ -59,8 +59,8 @@ int		main(int argc, char **argv)
 	add_drawable(&drawables, "sq", create_square);
 	add_drawable(&drawables, "tr", create_triangle);
 	scene = parse_scene(argv[1], drawables);
-	init_ray_tables(scene);
 	init_win(scene);
+	init_ray_tables(scene);
 	init_buffers(scene);
 	stack = create_stack(MAX_RECURSION_DEPTH + 69, 1);
 	clock_t begin = clock();
@@ -71,13 +71,6 @@ int		main(int argc, char **argv)
 	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 	printf("Time Elapsed: %lf\n", time_spent);
 	
-	int x;
-	int y;
-	mlx_get_screen_size(g_win.mlx, &x, &y);
-	
-	printf("x = %d\n", x);
-	printf("y = %d\n", y);
-
 	#ifndef USING_SDL
 		mlx_key_hook(g_win.win, interact, (void*)&scene);
 		mlx_loop(g_win.mlx);
