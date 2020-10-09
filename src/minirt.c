@@ -71,15 +71,15 @@ int		main(int argc, char **argv)
 	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 	printf("Time Elapsed: %lf\n", time_spent);
 	
-	int* x = malloc(sizeof(int));
-	int* y = malloc(sizeof(int));
-	printf("x = %d\n", *x);
-	printf("y = %d\n", *y);
+	int x;
+	int y;
+	printf("x = %d\n", x);
+	printf("y = %d\n", y);
 
-	mlx_get_screen_size(g_win.mlx, x, y);
+	mlx_get_screen_size(g_win.mlx, &x, &y);
 	
-	printf("x = %d\n", *x);
-	printf("y = %d\n", *y);
+	printf("x = %d\n", x);
+	printf("y = %d\n", y);
 
 	#ifndef USING_SDL
 		mlx_key_hook(g_win.win, interact, (void*)&scene);
