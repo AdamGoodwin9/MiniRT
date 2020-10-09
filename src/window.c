@@ -135,7 +135,6 @@ void	render_frame(t_scene scene)
 		g_win.win = mlx_new_window(g_win.mlx, scene.resolution.x, scene.resolution.y, "miniRT");
 		g_win.img = mlx_new_image(g_win.mlx, scene.resolution.x, scene.resolution.y);
 		g_win.buffer = (int*)mlx_get_data_addr(g_win.img, &g_win.bpp, &g_win.s_l, &g_win.endian);
-		return (scene);
 	}
 
 	int		*get_buffer(t_vect **ray_table, t_scene scene, t_point start, t_r_stack stack)

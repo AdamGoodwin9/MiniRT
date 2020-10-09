@@ -184,7 +184,7 @@ typedef struct	s_drawable
 	t_sdl_win g_sdl_win;
 # endif
 
-t_scene		init_win(t_scene scene);
+void		init_win(t_scene scene);
 void 		print_vect(t_vect vect, char *str); // dont kep lpplz
 int			interact(int keycode, void *param);
 int			loop(void *param);
