@@ -53,7 +53,7 @@ int	gamma_corrected(int color, double one_over_gamma)
 	}
 #endif
 
-t_scene	init_win(t_scene scene)
+void	init_win(t_scene scene)
 {
 	#ifndef USING_SDL
 		return (mlx_init_win(scene));
@@ -81,37 +81,59 @@ void	render_frame(t_scene scene)
 		scene = (t_scene*)param;
 		ft_putnbr_fd(keycode, 1);
 		ft_putchar_fd('\n', 1);
-		if (keycode == LEFT_ARROW && scene->camera_count != 1)
+		if (!scene->animate)
 		{
-			if (--scene->active_camera == -1)
-				scene->active_camera = scene->camera_count - 1;
-			render_frame(*scene);
+			if (keycode == LEFT_ARROW && scene->camera_count != 1)
+			{
+				if (--scene->active_camera == -1)
+					scene->active_camera = scene->camera_count - 1;
+				render_frame(*scene);
+			}
+			if (keycode == RIGHT_ARROW && scene->camera_count != 1)
+			{
+				if (++scene->active_camera == scene->camera_count)
+					scene->active_camera = 0;
+				render_frame(*scene);
+			}
 		}
-		if (keycode == RIGHT_ARROW && scene->camera_count != 1)
+		else
 		{
-			if (++scene->active_camera == scene->camera_count)
-				scene->active_camera = 0;
-			render_frame(*scene);
+			if (keycode == LEFT_ARROW)
+			{
+				scene->frame_duration += FRAME_DURATION_UNIT;
+			}
+			if (keycode == RIGHT_ARROW && scene->frame_duration > FRAME_DURATION_UNIT)
+			{
+				scene->frame_duration -= FRAME_DURATION_UNIT;
+			}
 		}
+		
 		if (keycode == 53 || keycode == ESC)
 			exit(0);
 		return (0);
 	}
 
-	t_scene	mlx_init_win(t_scene scene)
+	int loop(void *param)
 	{
-		int x;
-		int y;
+		t_scene *scene;
+		static int t = 0;
 
-		if (!(g_win.mlx = mlx_init()))
-			clean_exit(1, "Failed to set up the connection to the graphical system.");
-		mlx_get_screen_size(g_win.mlx, &x, &y);
-		if (scene.resolution.x > x)
-			scene.resolution.x = x;
-		if (scene.resolution.y > y)
-			scene.resolution.y = y;
-		g_win.win = mlx_new_window(g_win.mlx, scene.resolution.y, scene.resolution.x, "miniRT");
-		g_win.img = mlx_new_image(g_win.mlx, scene.resolution.y, scene.resolution.x);
+		t++; 
+		scene = (t_scene*)param;
+		if (t >= scene->frame_duration && scene->animate)
+		{
+			t = 0;
+			if (++scene->active_camera == scene->camera_count)
+				scene->active_camera = 0;
+		}
+		render_frame(*scene);
+		return (0);
+	}
+
+	void	mlx_init_win(t_scene scene)
+	{
+		g_win.win = mlx_new_window(g_win.mlx, scene.resolution.x, scene.resolution.y, "miniRT");
+		g_win.img = mlx_new_image(g_win.mlx, scene.resolution.x, scene.resolution.y);
 		g_win.buffer = (int*)mlx_get_data_addr(g_win.img, &g_win.bpp, &g_win.s_l, &g_win.endian);
 		return (scene);
 	}
@@ -133,7 +155,7 @@ void	render_frame(t_scene scene)
 			while (++j < (int)scene.resolution.x)
 			{
 				color = trace_ray(ray_table[i][j], scene, start, -1, 0, stack);
-				buf[j + i * (int)scene.resolution.y] = gamma_corrected(color, one_over_gamma);
+				buf[j + i * (int)scene.resolution.x] = gamma_corrected(color, one_over_gamma);
 			}
 		}
 		return (buf);
@@ -150,7 +172,7 @@ void	render_frame(t_scene scene)
 			j = -1;
 			while (++j < (int)scene.resolution.x)
 			{
-				g_win.buffer[j + i * (int)scene.resolution.y] = scene.camera_list[scene.active_camera].buf[j + i * (int)scene.resolution.y];
+				g_win.buffer[j + i * (int)scene.resolution.x] = scene.camera_list[scene.active_camera].buf[j + i * (int)scene.resolution.x];
 			}
 		}
 		mlx_put_image_to_window(g_win.mlx, g_win.win, g_win.img, 0, 0);
