@@ -231,11 +231,11 @@ t_scene check_resolution(t_scene scene, t_parse_args parsed)
 	if (args[0] < 0 || args[1] < 0)
 		clean_exit(1, "Negative resolution");
 	scene.resolution = new_vect(parsed.args[0], parsed.args[1], 0);
-	int* x;
-	int* y;
+	int* x = malloc(sizeof(int));
+	int* y = malloc(sizeof(int));
 	printf("x = %d\n", x);
 	printf("y = %d\n", y);
-	
+
 	mlx_get_screen_size(g_win.mlx, x, y);
 	
 	printf("x = %d\n", x);
