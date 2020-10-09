@@ -25,6 +25,7 @@ t_scene pre_init_mlx(t_scene scene)
 		scene.resolution.x = x;
 	if (scene.resolution.y > y)
 		scene.resolution.y = y;
+	return (scene);
 }
 
 void init_ray_tables(t_scene scene)
