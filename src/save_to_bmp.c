@@ -64,7 +64,6 @@ int		find_suffix(t_scene scene)
 		tmp = build_str_name(scene.scene_name, s, 0);
 		if ((fd = open(tmp, O_RDONLY)) == -1)
 		{
-				printf("chosen %d\n", s);
 				free(tmp);
 				return (s);
 		}
@@ -86,11 +85,9 @@ int		save_to_bmp(t_scene scene)
 	cam_no = 0;
 	while (cam_no < scene.camera_count)
 	{
-		printf("suffix is %d cam no : %d\n", suffix, cam_no);
 		tmp = build_str_name(scene.scene_name, suffix, cam_no);
 		if ((fd = open(tmp, O_CREAT, S_IRWXU)) == -1)
 			clean_exit(1, "Failed to generate file");
-		printf("Created %s", tmp);
 		free(tmp);
 		close(fd);
 		cam_no++;
