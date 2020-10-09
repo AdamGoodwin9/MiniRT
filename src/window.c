@@ -56,7 +56,7 @@ int	gamma_corrected(int color, double one_over_gamma)
 void	init_win(t_scene scene)
 {
 	#ifndef USING_SDL
-		return (mlx_init_win(scene));
+		mlx_init_win(scene);
 	#endif
 	#ifdef USING_SDL
 		sdl_init_win(scene);
