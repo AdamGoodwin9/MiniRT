@@ -24,34 +24,29 @@ char	*build_str_name(char *radical, int f_no, int cam_no)
 	size = sizeof(char) * (10 + ft_strlen(radical) + (int)(log10(f_no * cam_no + 1) + 2));
 	if (!(ret = (char*)malloc(size)))
 		clean_exit(1, "Malloc failed lmao");
-	ft_strlcpy(ret, radical, ft_strlen(radical));
-	//ft_memmove(ret, radical, ft_strlen(radical) + 1);
+	ft_strlcpy(ret, radical, size);
 	cur = ft_indexof('.', ret) > -1 ? ft_indexof('.', ret) : ft_strlen(ret);
 	ret[cur] = '\0';
 
-	ft_strlcpy(ret + cur, "_", ft_strlen(radical) - cur);	
-	//ft_memmove(ret + cur, "_", 2);
+	ft_strlcpy(ret + cur, "_", size - cur);	
 	cur = ft_strlen(ret);
 	
 	if (!(tmp = ft_itoa(f_no)))
 		clean_exit(1, "Malloc failed lmao");
-	ft_strlcpy(ret + cur, tmp, ft_strlen(radical) - cur);	
+	ft_strlcpy(ret + cur, tmp, size - cur);	
 	cur = ft_strlen(ret);
 	free(tmp);
 
-	ft_strlcpy(ret + cur, "_cam", ft_strlen(radical) - cur);		
-	//ft_memmove(ret + cur, "_cam", 5);
+	ft_strlcpy(ret + cur, "_cam", size - cur);		
 	cur = ft_strlen(ret);
 
 	if (!(tmp = ft_itoa(cam_no)))
 		clean_exit(1, "Malloc failed lmao");
-	ft_strlcpy(ret + cur, tmp, ft_strlen(radical) - cur);	
-	//ft_memmove(ret + cur, tmp, ft_strlen(tmp) + 1);
+	ft_strlcpy(ret + cur, tmp, size - cur);	
 	cur = ft_strlen(ret);
 	free(tmp);
 
-	ft_strlcpy(ret + cur, ".bmp", ft_strlen(radical) - cur);		
-	//ft_memmove(ret + cur, ".bmp", 5);
+	ft_strlcpy(ret + cur, ".bmp", size - cur);		
 	cur = ft_strlen(ret);
 	ret[cur] = '\0';
 	return (ret);
@@ -93,13 +88,12 @@ int		save_to_bmp(t_scene scene)
 	{
 		printf("suffix is %d cam no : %d\n", suffix, cam_no);
 		tmp = build_str_name(scene.scene_name, suffix, cam_no);
-		if ((fd = open(tmp, O_CREAT)) == -1)
+		if ((fd = open(tmp, O_CREAT, S_IRWXU)) == -1)
 			clean_exit(1, "Failed to generate file");
 		printf("Created %s", tmp);
 		free(tmp);
 		close(fd);
 		cam_no++;
-	}
-	
+	}	
 	return (0);
 }
