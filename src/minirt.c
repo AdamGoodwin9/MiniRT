@@ -15,12 +15,9 @@
 
 void init_ray_tables(t_scene scene)
 {
-	printf("asdad\n");
 	while (scene.active_camera < scene.camera_count)
 	{
-		printf("E\n");
 		scene.camera_list[scene.active_camera].ray_table = init_tracer(scene);
-		printf("F\n");
 		scene.active_camera++;
 	}
 	scene.active_camera = 0;
