@@ -106,7 +106,7 @@ void	render_frame(t_scene scene)
 		if (!(g_win.mlx = mlx_init()))
 			clean_exit(1, "Failed to set up the connection to the graphical system.");
 		mlx_get_screen_size(g_win.mlx, &x, &y);
-		if (scene.resolutionl.x > x)
+		if (scene.resolution.x > x)
 			scene.resolution.x = x;
 		if (scene.resolution.y > y)
 			scene.resolution.y = y;
