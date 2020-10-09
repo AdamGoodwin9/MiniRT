@@ -73,9 +73,6 @@ int		main(int argc, char **argv)
 	
 	int x;
 	int y;
-	printf("x = %d\n", x);
-	printf("y = %d\n", y);
-
 	mlx_get_screen_size(g_win.mlx, &x, &y);
 	
 	printf("x = %d\n", x);
