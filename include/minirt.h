@@ -176,7 +176,7 @@ typedef struct	s_drawable
 	t_sdl_win g_sdl_win;
 # endif
 
-void		init_win(t_scene scene);
+t_scene		init_win(t_scene scene);
 void 		print_vect(t_vect vect, char *str); // dont kep lpplz
 int			interact(int keycode, void *thing);
 
@@ -255,7 +255,7 @@ void		add_drawable(t_drawable **drawables, char *name, t_figure (*create_func)(t
 int			trace_ray(t_vect ray, t_scene scene, t_point start, int	prev_index, int ignore, t_r_stack stack);
 double		angle(t_vect v1, t_vect v2);
 
-void		mlx_init_win(t_scene scene);
+t_scene		mlx_init_win(t_scene scene);
 void		mlx_render_frame(t_scene scene);
 int			*get_buffer(t_vect **ray_table, t_scene scene, t_point start, t_r_stack stack);
 

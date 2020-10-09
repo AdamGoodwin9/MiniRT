@@ -231,7 +231,6 @@ t_scene check_resolution(t_scene scene, t_parse_args parsed)
 	if (args[0] < 0 || args[1] < 0)
 		clean_exit(1, "Negative resolution");
 	scene.resolution = new_vect(parsed.args[0], parsed.args[1], 0);
-	
 	return (scene);
 }
 

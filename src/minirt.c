@@ -59,7 +59,7 @@ int		main(int argc, char **argv)
 	add_drawable(&drawables, "sq", create_square);
 	add_drawable(&drawables, "tr", create_triangle);
 	scene = parse_scene(argv[1], drawables);
-	init_win(scene);
+	scene = init_win(scene);
 	init_ray_tables(scene);
 	init_buffers(scene);
 	stack = create_stack(MAX_RECURSION_DEPTH + 69, 1);
