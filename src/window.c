@@ -108,7 +108,7 @@ void	render_frame(t_scene scene)
 		mlx_get_screen_size(g_win.mlx, &x, &y);
 		if (scene.resolutionl.x > x)
 			scene.resolution.x = x;
-		if (scene.resolutionl.y > y)
+		if (scene.resolution.y > y)
 			scene.resolution.y = y;
 		g_win.win = mlx_new_window(g_win.mlx, scene.resolution.y, scene.resolution.x, "miniRT");
 		g_win.img = mlx_new_image(g_win.mlx, scene.resolution.y, scene.resolution.x);
