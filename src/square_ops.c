@@ -79,11 +79,11 @@ t_point     square_intersection(t_square square, t_vect ray, t_point start)
     result.z = r1 * ray.z + start.z;
     u = subtract(result, square.center);
     if (square.normal.x != 0)
-		width = normalize(new_vect((square.normal.y + square.normal.z) / square.normal.x, -1, -1));
-	else if (square.normal.y != 0)
-		width = normalize(new_vect((square.normal.x + square.normal.z) / square.normal.y, -1, -1));
+		width = normalize(new_vect((square.normal.z) / square.normal.x, 0, -1));
+	else if (square.normal.z != 0)
+		width = normalize(new_vect((square.normal.x) / square.normal.z, 0, -1));
 	else
-		width = normalize(new_vect((square.normal.y + square.normal.x) / square.normal.z, -1, -1));
+		width = new_vect(1,0,0);
 	height = cross(square.normal, width);
 	if (!(dot(u, width) < square.length && dot(u, width) > 0 && dot(u, height) < square.length && dot(u, height) > 0))
     {
