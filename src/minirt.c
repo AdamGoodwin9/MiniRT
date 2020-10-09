@@ -15,12 +15,9 @@
 
 void init_ray_tables(t_scene scene)
 {
-	printf("asdad\n");
 	while (scene.active_camera < scene.camera_count)
 	{
-		printf("E\n");
 		scene.camera_list[scene.active_camera].ray_table = init_tracer(scene);
-		printf("F\n");
 		scene.active_camera++;
 	}
 	scene.active_camera = 0;
@@ -98,7 +95,6 @@ int		main(int argc, char **argv)
 	scene = parse_console_args(scene, argc, argv);
 	scene.scene_name = argv[1];
 	scene.scene_name[MAX_FILE_NAME_SIZE - 1] = 0;
-	printf("D\n");
 	init_ray_tables(scene);
 	init_buffers(scene);
 	stack = create_stack(MAX_RECURSION_DEPTH + 69, 1);
