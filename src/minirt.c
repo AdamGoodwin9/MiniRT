@@ -13,6 +13,21 @@
 #include "minirt.h"
 #include <time.h>
 
+t_scene pre_init_mlx(t_scene scene)
+{
+	int x;
+	int y;
+
+	if (!(g_win.mlx = mlx_init()))
+		clean_exit(1, "Failed to set up the connection to the graphical system.");
+	mlx_get_screen_size(g_win.mlx, &x, &y);
+	if (scene.resolution.x > x)
+		scene.resolution.x = x;
+	if (scene.resolution.y > y)
+		scene.resolution.y = y;
+	return (scene);
+}
+
 void init_ray_tables(t_scene scene)
 {
 	while (scene.active_camera < scene.camera_count)
@@ -68,6 +83,11 @@ t_scene	parse_console_args(t_scene scene, int argc, char **argv)
 	return (scene);
 }
 
+int		exit_hook()
+{
+	exit(0);
+}
+
 int		main(int argc, char **argv)
 {
 	t_scene		scene;
@@ -88,39 +108,23 @@ int		main(int argc, char **argv)
 	add_drawable(&drawables, "tr", create_triangle);
 	scene = parse_scene(argv[1], drawables);
 	scene = parse_console_args(scene, argc, argv);
+	scene = pre_init_mlx(scene);
+	scene.scene_name = argv[1];
+	scene.scene_name[MAX_FILE_NAME_SIZE - 1] = 0;
 	init_ray_tables(scene);
-	init_win(scene);
 	init_buffers(scene);
 	stack = create_stack(MAX_RECURSION_DEPTH + 69, 1);
-	clock_t begin = clock();
-
-	render_frame(scene);
-
-	clock_t end = clock();
-	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-	printf("Time Elapsed: %lf\n", time_spent);
-	#ifndef USING_SDL
+	if (!scene.save_to_file)
+	{
+		init_win(scene);
+		mlx_hook(g_win.win, 33, 0, exit_hook, NULL);
 		mlx_loop_hook(g_win.mlx, loop, (void*)&scene);
 		mlx_key_hook(g_win.win, interact, (void*)&scene);
 		mlx_loop(g_win.mlx);
-	#endif
-	#ifdef USING_SDL
-		while (1)
-		{
-			while(SDL_PollEvent(&g_sdl_win.event))
-			{
-				if(g_sdl_win.event.type == SDL_KEYDOWN)
-				{
-					if(g_sdl_win.event.key.keysym.sym == SDLK_ESCAPE)
-					{
-						SDL_DestroyWindow(g_sdl_win.window);
-						SDL_Quit();
-						clean_exit(0, NULL);
-						return (0);
-					}
-				}
-			}
-		}
-	#endif
+	}
+	else
+	{
+		save_to_bmp(scene);
+	}
 	return (0);
 }
