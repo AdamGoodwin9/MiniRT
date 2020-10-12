@@ -137,7 +137,7 @@ void	render_frame(t_scene scene)
 		g_win.buffer = (int*)mlx_get_data_addr(g_win.img, &g_win.bpp, &g_win.s_l, &g_win.endian);
 	}
 
-	int		*get_buffer(t_vect **ray_table, t_scene scene, t_point start, t_r_stack stack)
+	int		*get_buffer(t_vect **ray_table, t_scene scene, t_point start)
 	{
 		int	i;
 		int	j;
@@ -153,7 +153,7 @@ void	render_frame(t_scene scene)
 			j = -1;
 			while (++j < (int)scene.resolution.x)
 			{
-				color = trace_ray(ray_table[i][j], scene, start, -1, 0, stack);
+				color = trace_ray(ray_table[i][j], scene, start, -1, 0);
 				buf[j + i * (int)scene.resolution.x] = gamma_corrected(color, one_over_gamma);
 			}
 		}
