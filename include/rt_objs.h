@@ -6,7 +6,7 @@
 /*   By: ede-thom <ede-thom@42.edu.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 20:12:47 by ede-thom          #+#    #+#             */
-/*   Updated: 2020/10/12 20:20:11 by ede-thom         ###   ########.fr       */
+/*   Updated: 2020/10/12 20:51:50 by ede-thom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@
 # define MIN_RENDER_DIST 0.001
 # define AMBIENCE_LIGHTING 0.03
 # define SKY_COLOR 0x1a3766
-# define FOV_H M_PI / 2
-# define FOV_W M_PI / 2
 # define MAX_RECURSION_DEPTH 50
 # define SCREEN_GAMMA 2.2
 # define ZERO_FLOAT_PRECISION 0.0001
 # define MAX_PARSE_FIGURE_ARGUMENTS 20
 # define MAX_FIGURE_NAME_LENGTH 10
+
+# include "utility.h"
 
 typedef struct	s_material
 {
@@ -93,13 +93,6 @@ typedef struct	s_scene
 	int			frame_duration;
 	int			save_to_file;
 }				t_scene;
-
-typedef struct	s_parse_args
-{
-	char	name[MAX_FIGURE_NAME_LENGTH];
-	float	args[MAX_PARSE_FIGURE_ARGUMENTS + 5];
-	int		size;
-}				t_parse_args;
 
 typedef struct	s_drawable
 {
