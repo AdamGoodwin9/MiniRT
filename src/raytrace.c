@@ -104,7 +104,7 @@ float	get_lum_intensity(t_figure figure, t_point inter, t_point spotlight, t_poi
 	return (0);
 }
 
-int		trace_ray(t_vect ray, t_scene scene, t_point start, int prev_index, int ignore, t_r_stack stack) //ignored index is to be changed (last_HIT_index)
+int		trace_ray(t_vect ray, t_scene scene, t_point start, int prev_index, int ignore) //ignored index is to be changed (last_HIT_index)
 {
 	int			i;
 	int			index;
@@ -145,7 +145,7 @@ int		trace_ray(t_vect ray, t_scene scene, t_point start, int prev_index, int ign
 		{
 			reflected_dir = get_reflective_vector(scene.figure_list[index], closest_intersection, ray, start);
 			modified_start = add(closest_intersection, scale(reflected_dir, EPSILON));
-			reflective_color = trace_ray(reflected_dir, scene, modified_start, index, 0, stack);
+			reflective_color = trace_ray(reflected_dir, scene, modified_start, index, 0);
 		}
 		lum_intensity = get_lum_intensity(scene.figure_list[index], closest_intersection, scene.spotlight, start);
 		lum_intensity = (1 - scene.amb_light_ratio) * lum_intensity + scene.amb_light_ratio;

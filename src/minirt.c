@@ -48,7 +48,7 @@ void init_buffers(t_scene scene)
 	{
 		scene.active_camera = i;
 		c = scene.camera_list[i];
-		c.buf = get_buffer(c.ray_table, scene, c.location, stack);
+		c.buf = get_buffer(c.ray_table, scene, c.location);
 		scene.camera_list[i] = c;
 		i++;
 	}
@@ -114,7 +114,6 @@ int		main(int argc, char **argv)
 	scene.scene_name[MAX_FILE_NAME_SIZE - 1] = 0;
 	init_ray_tables(scene);
 	init_buffers(scene);
-	stack = create_stack(MAX_RECURSION_DEPTH + 69, 1);
 	if (!scene.save_to_file)
 	{
 		init_win(scene);

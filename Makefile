@@ -20,7 +20,6 @@ SRCS		=	src/minirt.c\
 				src/error.c\
 				src/parsing.c\
 				src/window.c\
-				src/stack.c\
 				src/save_to_bmp.c\
 
 SRCS		+=	src/plane_ops.c\
