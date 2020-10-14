@@ -61,15 +61,13 @@ int		tab_del_return(char **tab, int ret)
 	return (ret);
 }
 
-int gamma_corrected(int color, double one_over_gamma)
+int		gamma_corrected(int color, double one_over_gamma)
 {
 	t_fcolor rgb;
 
 	rgb = int_to_fcolor(color);
-
 	rgb.red = pow(rgb.red, one_over_gamma);
 	rgb.green = pow(rgb.green, one_over_gamma);
 	rgb.blue = pow(rgb.blue, one_over_gamma);
-
 	return (fcolor_to_int(rgb));
 }
