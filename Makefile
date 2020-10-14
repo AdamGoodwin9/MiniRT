@@ -22,7 +22,9 @@ SRCS		=	src/minirt.c\
 				src/color_ops2.c\
 				src/ft_atof.c\
 				src/error.c\
-				src/parsing.c\
+				src/parsing2.c\
+				src/parsing1.c\
+				src/parsing0.c\
 				src/window.c\
 				src/save_to_bmp.c\
 

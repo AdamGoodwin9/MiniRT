@@ -6,7 +6,7 @@
 /*   By: ede-thom <ede-thom@42.edu.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 20:48:16 by ede-thom          #+#    #+#             */
-/*   Updated: 2020/10/12 20:49:00 by ede-thom         ###   ########.fr       */
+/*   Updated: 2020/10/14 20:05:25 by ede-thom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ typedef struct	s_parse_args
 
 int				name_cmp(char *fixed, char *var);
 float			ft_atof(char *nb);
+int				tab_del_return(char **tab, int ret);
 
 #endif
