@@ -6,7 +6,7 @@
 /*   By: ede-thom <ede-thom@42.edu.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 20:12:47 by ede-thom          #+#    #+#             */
-/*   Updated: 2020/10/12 20:51:50 by ede-thom         ###   ########.fr       */
+/*   Updated: 2020/10/14 20:42:57 by ede-thom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,16 @@ typedef t_figure	t_circle;
 typedef t_figure	t_square;
 typedef t_figure	t_triangle;
 
+
+t_scene			check_light(t_scene scene, t_parse_args parsed);
+t_scene			check_amb_light(t_scene scene, t_parse_args parsed);
+t_scene			check_camera(t_scene scene, t_parse_args parsed);
+t_scene			check_resolution(t_scene scene, t_parse_args parsed);
+t_scene			count_figures(char **lines, t_drawable *drawables);
+int				count_cameras(char **lines);
+void			count_res_ambient(char **lines);
+char			**read_lines(int fd);
+t_scene			parse_switch(t_scene scene, t_parse_args parsed, t_drawable *drawables);
+t_scene 		parse_line(t_scene scene, char *raw_line, t_drawable *drawables);
+t_scene 		build_scene(t_scene scene, char **lines, t_drawable *drawables);
 #endif

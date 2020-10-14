@@ -6,14 +6,14 @@
 /*   By: ede-thom <ede-thom@42.edu.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 20:12:53 by ede-thom          #+#    #+#             */
-/*   Updated: 2020/10/14 19:43:29 by ede-thom         ###   ########.fr       */
+/*   Updated: 2020/10/14 19:55:55 by ede-thom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_VECTORS_H
 # define RT_VECTORS_H
 
-#include <math.h>
+# include <math.h>
 
 typedef struct	s_point
 {
