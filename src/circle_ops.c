@@ -26,8 +26,7 @@ char		*check_circle_args(t_parse_args parsed)
 		return ("Circle diameter is negative");
 	if (args[7] > 255 || args[8] > 255 || args[9] > 255 ||
 		args[7] < 0 || args[8] < 0 || args[9] < 0)
-		return ("Invalid RGB color values for circle (
-		must be values between 0 and 255 per color).");
+		return ("Invalid RGB values for circle (must be between 0 and 255).");
 	return (NULL);
 }
 

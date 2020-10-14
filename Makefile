@@ -16,6 +16,7 @@ SRCS		=	src/minirt.c\
 				src/raytrace.c\
 				src/reflection.c\
 				src/color_ops.c\
+				src/color_ops2.c\
 				src/ft_atof.c\
 				src/error.c\
 				src/parsing.c\
