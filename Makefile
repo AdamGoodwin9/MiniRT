@@ -11,7 +11,6 @@
 # **************************************************************************** #
 
 SRCS		=	src/minirt.c\
-				src/setup_win.c\
 				src/vector_ops0.c\
 				src/vector_ops1.c\
 				src/vector_ops2.c\
