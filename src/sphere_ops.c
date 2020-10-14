@@ -6,7 +6,7 @@
 /*   By: ede-thom <ede-thom@42.edu.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/16 18:01:17 by dhorvill          #+#    #+#             */
-/*   Updated: 2020/10/14 18:34:15 by ede-thom         ###   ########.fr       */
+/*   Updated: 2020/10/14 19:08:35 by ede-thom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char		*check_sphere_args(t_parse_args parsed)
 		return ("Sphere diameter is negative");
 	if (args[4] > 255 || args[5] > 255 || args[6] > 255 ||
 		args[4] < 0 || args[5] < 0 || args[6] < 0)
-		return ("Invalid RGB values for plane (must be between 0 and 255).");
+		return ("Invalid RGB values for sphere (must be between 0 and 255).");
 	return (NULL);
 }
 
