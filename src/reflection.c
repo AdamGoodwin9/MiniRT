@@ -12,7 +12,8 @@
 
 #include "minirt.h"
 
-t_vect	get_reflective_vector(t_figure figure, t_point inter, t_vect incident, t_vect start)
+t_vect	get_reflective_vector(t_figure figure, t_point inter,
+								t_vect incident, t_vect start)
 {
 	t_vect normal;
 	t_vect reflected;
@@ -23,7 +24,7 @@ t_vect	get_reflective_vector(t_figure figure, t_point inter, t_vect incident, t_
 	return (reflected);
 }
 
-int figure_eclipses_light(t_vect inter, t_figure shape, t_vect light)
+int		figure_eclipses_light(t_vect inter, t_figure shape, t_vect light)
 {
 	t_vect	inter_to_light;
 	t_vect	inter_to_shape;
@@ -35,6 +36,6 @@ int figure_eclipses_light(t_vect inter, t_figure shape, t_vect light)
 	shape_inter = shape.intersection(shape, normalize(inter_to_light), inter);
 	inter_to_shape = subtract(shape_inter, inter);
 	if (norm(inter_to_light) < norm(inter_to_shape))
-		return(0);
+		return (0);
 	return (1);
 }
