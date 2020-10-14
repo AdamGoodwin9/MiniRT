@@ -130,11 +130,31 @@ void	render_frame(t_scene scene)
 		return (0);
 	}
 
+	t_scene	pre_init_mlx(t_scene scene)
+	{
+		int x;
+		int y;
+
+		if (!(g_win.mlx = mlx_init()))
+			clean_exit(1, "Failed to connect to the graphical system.");
+		mlx_get_screen_size(g_win.mlx, &x, &y);
+		if (scene.resolution.x > x)
+			scene.resolution.x = x;
+		if (scene.resolution.y > y)
+			scene.resolution.y = y;
+		return (scene);
+	}
+
 	void	mlx_init_win(t_scene scene)
 	{
 		g_win.win = mlx_new_window(g_win.mlx, scene.resolution.x, scene.resolution.y, "miniRT");
 		g_win.img = mlx_new_image(g_win.mlx, scene.resolution.x, scene.resolution.y);
 		g_win.buffer = (int*)mlx_get_data_addr(g_win.img, &g_win.bpp, &g_win.s_l, &g_win.endian);
+	}
+
+	int		exit_hook(void)
+	{
+		exit(0);
 	}
 
 	int		*get_buffer(t_vect **ray_table, t_scene scene, t_point start)
