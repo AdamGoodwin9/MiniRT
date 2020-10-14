@@ -38,6 +38,7 @@ float	ft_atof(char *nb)
 		mult *= 0.1;
 	}
 	return ((i + d) * neg);
+
 }
 
 int		name_cmp(char *fixed, char *var)
