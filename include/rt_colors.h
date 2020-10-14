@@ -33,7 +33,6 @@ int				weighted_average(t_color base, t_color reflect, float weight);
 t_color			new_color_vect(t_vect v);
 int				filter_color(int color, int filter);
 t_color			new_color(int r, int g, int b);
-t_fcolor		new_fcolor(int r, int g, int b);
 t_color			int_to_rgb(int color_int);
 t_fcolor		int_to_fcolor(int color_int);
 int				fcolor_to_int(t_fcolor color);
