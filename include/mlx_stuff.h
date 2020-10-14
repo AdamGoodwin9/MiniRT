@@ -37,6 +37,8 @@ t_window	g_win;
 void			init_win(t_scene scene);
 int				interact(int keycode, void *param);
 int				loop(void *param);
+int				exit_hook(void);
+t_scene			pre_init_mlx(t_scene scene);
 void			mlx_init_win(t_scene scene);
 void			mlx_render_frame(t_scene scene);
 int				*get_buffer(t_vect **ray_table, t_scene scene, t_point start);
