@@ -6,7 +6,7 @@
 /*   By: ede-thom <ede-thom@42.edu.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 20:17:20 by ede-thom          #+#    #+#             */
-/*   Updated: 2020/10/12 20:49:25 by ede-thom         ###   ########.fr       */
+/*   Updated: 2020/10/14 23:04:28 by ede-thom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,11 @@ t_scene		parse_scene(char *scene_file_path, t_drawable *drawable_list);
 void		add_drawable(t_drawable **drawables, char *name,
 							t_figure (*create_func)(t_parse_args parsed));
 
-int			trace_ray(t_vect ray, t_scene scene,
-						t_point start, int	prev_index, int ignore);
+int			color_shade(float intensity, t_figure figure, int reflective_color);
+float		get_lum_intensity(t_figure figure, t_point inter,
+							t_point spotlight, t_point start);
+
+int			trace_ray(t_vect ray, t_scene scene, t_point start);
 int			save_to_bmp(t_scene scene);
 
 #endif

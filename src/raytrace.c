@@ -6,7 +6,7 @@
 /*   By: ede-thom <ede-thom@42.edu.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 19:15:30 by dhorvill          #+#    #+#             */
-/*   Updated: 2020/06/16 17:12:38 by ede-thom         ###   ########.fr       */
+/*   Updated: 2020/10/14 23:02:53 by ede-thom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,36 +83,7 @@ t_vect	**init_tracer(t_scene s)
 	return (finish_tracer(s, start, step, ray_table));
 }
 
-int		color_shade(float intensity, t_figure figure, int reflective_color)
-{
-	t_color base;
-	t_color	reflective_rgb;
-
-	base = color_intensity(figure.color, intensity);
-	reflective_rgb = int_to_rgb(0);
-	if (figure.is_reflective > 0)
-		reflective_rgb = int_to_rgb(reflective_color);
-	if (figure.is_reflective == 0)
-		return (rgb_to_int(base));
-	return (weighted_average(base, reflective_rgb, figure.is_reflective));
-}
-
-float	get_lum_intensity(t_figure figure, t_point inter,
-							t_point spotlight, t_point start)
-{
-	t_point	normal;
-	t_point	ray_to_light;
-	float	result;
-
-	normal = figure.get_normal_at(inter, figure, start);
-	ray_to_light = vector(inter, spotlight);
-	if ((result = dot(normal, ray_to_light)) > 0)
-		return (result);
-	return (0);
-}
-
-int		trace_ray(t_vect ray, t_scene s, t_point start,
-					int prev_index, int ignore)
+int		trace_ray(t_vect ray, t_scene s, t_point start)
 {
 	int			i;
 	int			index;
@@ -136,8 +107,6 @@ int		trace_ray(t_vect ray, t_scene s, t_point start,
 	i = -1;
 	while (++i < s.figure_count)
 	{
-		if (i == prev_index && ignore)
-			continue;
 		intersection = s.figure_list[i].intersection(s.figure_list[i], ray, start);
 		if ((distance = norm(true_vect(start, intersection))) < closest_distance && distance > MIN_RENDER_DIST)
 		{
@@ -152,7 +121,7 @@ int		trace_ray(t_vect ray, t_scene s, t_point start,
 		{
 			reflected_dir = get_reflective_vector(s.figure_list[index], closest_intersection, ray, start);
 			modified_start = add(closest_intersection, scale(reflected_dir, EPSILON));
-			reflective_color = trace_ray(reflected_dir, s, modified_start, index, 0);
+			reflective_color = trace_ray(reflected_dir, s, modified_start);
 		}
 		lum_intensity = get_lum_intensity(s.figure_list[index], closest_intersection, s.spotlight, start);
 		lum_intensity = (1 - s.amb_light_ratio) * lum_intensity + s.amb_light_ratio;

@@ -6,7 +6,7 @@
 /*   By: ede-thom <ede-thom@42.edu.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 20:50:37 by ede-thom          #+#    #+#             */
-/*   Updated: 2020/10/14 21:26:33 by ede-thom         ###   ########.fr       */
+/*   Updated: 2020/10/14 23:02:26 by ede-thom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		*get_buffer(t_vect **ray_table, t_scene scene, t_point start)
 		j = -1;
 		while (++j < (int)scene.resolution.x)
 		{
-			color = trace_ray(ray_table[i][j], scene, start, -1, 0);
+			color = trace_ray(ray_table[i][j], scene, start);
 			buf[j + i * (int)scene.resolution.x] =
 					gamma_corrected(color, one_over_gamma);
 		}
