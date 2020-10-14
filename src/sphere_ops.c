@@ -6,7 +6,7 @@
 /*   By: ede-thom <ede-thom@42.edu.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/16 18:01:17 by dhorvill          #+#    #+#             */
-/*   Updated: 2020/10/14 18:29:56 by ede-thom         ###   ########.fr       */
+/*   Updated: 2020/10/14 18:34:15 by ede-thom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ t_point		sphere_intersection(t_sphere sphere, t_vect ray, t_point start)
 	t_vect		result;
 	t_vect		subbed;
 
+	result = new_vect(RENDER_DISTANCE, RENDER_DISTANCE, RENDER_DISTANCE);
 	subbed = subtract(sphere.center, start);
 	equa.a = 1;
 	equa.b = 2 * dot(ray, subbed);
