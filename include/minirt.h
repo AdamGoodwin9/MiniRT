@@ -52,14 +52,6 @@ t_vect		get_circle_normal_vector(t_vect inter, t_circle c, t_point start);
 t_vect		get_square_normal_vector(t_vect inter, t_square s, t_point start);
 t_vect		get_triangle_normal_vector(t_vect inter, t_triangle t, t_point st);
 
-int			sphere_eclipses_light(t_point inter, t_sphere s, t_point spot);
-int			plane_eclipses_light(t_point inter, t_plane plane, t_point light);
-int			hcyl_eclipses_light(t_point inter, t_hcyl hcyl, t_point spot);
-int			cyl_eclipses_light(t_point inter, t_cyl cyl, t_point spot);
-int			circle_eclipses_light(t_point inter, t_circle circle, t_point spot);
-int			square_eclipses_light(t_point inter, t_square square, t_point spot);
-int			triangle_eclipses_light(t_point inter, t_triangle t, t_point spot);
-
 void		render_frame(t_scene scene);
 t_vect		**init_tracer(t_scene scene);
 t_vect		scale(t_vect v, float scalar);
