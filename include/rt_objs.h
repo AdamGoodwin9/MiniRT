@@ -6,7 +6,7 @@
 /*   By: ede-thom <ede-thom@42.edu.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 20:12:47 by ede-thom          #+#    #+#             */
-/*   Updated: 2020/10/15 12:25:33 by ede-thom         ###   ########.fr       */
+/*   Updated: 2020/10/15 13:47:09 by ede-thom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ typedef struct	s_inters
 	float	distance;
 	int		index;
 }				t_inters;
-
 
 typedef struct	s_drawable
 {
