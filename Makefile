@@ -27,6 +27,7 @@ SRCS		=	src/minirt.c\
 				src/window.c\
 				src/save_to_bmp.c\
 				src/interact.c\
+				src/raytable.c\
 
 SRCS		+=	src/plane_ops.c\
 				src/sphere_ops.c\

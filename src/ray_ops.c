@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reflection.c                                       :+:      :+:    :+:   */
+/*   ray_ops.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ede-thom <ede-thom@42.edu.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 21:54:26 by dhorvill          #+#    #+#             */
-/*   Updated: 2020/10/14 22:57:16 by ede-thom         ###   ########.fr       */
+/*   Updated: 2020/10/15 12:54:27 by ede-thom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_vect	get_reflective_vector(t_figure figure, t_point inter,
+t_vect	get_refl_vector(t_figure figure, t_point inter,
 								t_vect incident, t_vect start)
 {
 	t_vect normal;

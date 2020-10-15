@@ -6,139 +6,94 @@
 /*   By: ede-thom <ede-thom@42.edu.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 19:15:30 by dhorvill          #+#    #+#             */
-/*   Updated: 2020/10/14 23:02:53 by ede-thom         ###   ########.fr       */
+/*   Updated: 2020/10/15 12:55:03 by ede-thom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_vect	**turn_ray_table(t_vect **ray_table, t_scene s,
-			t_vect ref, float theta)
-{
-	int		i;
-	int		j;
-
-	i = -1;
-	while (++i < s.resolution.y)
-	{
-		j = -1;
-		while (++j < s.resolution.x)
-		{
-			ray_table[i][j] = apply_rotation(ray_table[i][j], ref, theta);
-		}
-	}
-	return (ray_table);
-}
-
-t_vect	**finish_tracer(t_scene s, t_point start,
-						t_vect step, t_vect **ray_table)
-{
-	int		i;
-	int		j;
-	float	theta;
-	t_vect	rot_axis;
-
-	i = -1;
-	while (++i < s.resolution.y)
-	{
-		if (!(ray_table[i] = (t_vect*)malloc(sizeof(t_vect) * s.resolution.x)))
-			clean_exit(1, "Malloc Failed");
-		j = -1;
-		while (++j < s.resolution.x)
-		{
-			ray_table[i][j].x = start.x + step.x * (float)j;
-			ray_table[i][j].y = start.y + step.y * (float)i;
-			ray_table[i][j].z = 1;
-			ray_table[i][j] = normalize(ray_table[i][j]);
-		}
-	}
-	i = s.active_camera;
-	theta = angle(new_vect(0, 0, 1), s.camera_list[i].orientation);
-	rot_axis = cross(new_vect(0, 0, 1), s.camera_list[i].orientation);
-	if (norm(rot_axis) < EPSILON)
-		rot_axis = new_vect(0, 1, 0);
-	return (turn_ray_table(ray_table, s, rot_axis, theta));
-}
-
-t_vect	**init_tracer(t_scene s)
-{
-	t_vect	**ray_table;
-	t_point	start;
-	t_point end;
-	t_vect	step;
-	int		i;
-
-	if (!(ray_table = (t_vect**)malloc(sizeof(t_vect*) * s.resolution.y)))
-		clean_exit(1, "Malloc failed");
-	i = s.active_camera;
-	start = s.camera_list[i].orientation;
-	start.x = -sin(s.camera_list[i].fov / 2);
-	start.y = sin(s.camera_list[i].fov / 2 * (s.resolution.y / s.resolution.x));
-	start.z = 1;
-	end.x = sin(s.camera_list[i].fov / 2);
-	end.y = -sin(s.camera_list[i].fov / 2 * (s.resolution.y / s.resolution.x));
-	end.z = 1;
-	step.x = ((end.x - start.x) / (float)s.resolution.x);
-	step.y = ((end.y - start.y) / (float)s.resolution.y);
-	return (finish_tracer(s, start, step, ray_table));
-}
-
-int		trace_ray(t_vect ray, t_scene s, t_point start)
+t_inters	get_closest(t_scene s, t_vect ray, t_vect start)
 {
 	int			i;
-	int			index;
-	float		lum_intensity;
-	float		closest_distance;
-	float		distance;
-	int			reflective_color;
-	static int	current_recursion_depth;
-	t_point		intersection;
-	t_point		closest_intersection;
-	t_vect		reflected_dir;
-	t_vect		modified_start;
+	t_inters	inter;
+	t_inters	closest;
 
-	current_recursion_depth = 0;
+	closest.distance = RENDER_DISTANCE;
+	i = -1;
+	while (++i < s.figure_count)
+	{
+		inter.pos = s.figure_list[i].intersection(s.figure_list[i], ray, start);
+		if ((inter.distance = norm(true_vect(start, inter.pos)))
+								< closest.distance
+			&& inter.distance > MIN_RENDER_DIST)
+		{
+			inter.index = i;
+			closest = inter;
+		}
+	}
+	return (closest);
+}
+
+int			get_inter_color(t_scene s, t_inters closest,
+							t_vect start, int refl_col)
+{
+	float	lum_intensity;
+	int		i;
+
+	lum_intensity = get_lum_intensity(s.figure_list[closest.index],
+					closest.pos, s.spotlight, start);
+	lum_intensity = (1 - s.amb_light_ratio) * lum_intensity + s.amb_light_ratio;
+	i = -1;
+	while (++i < s.figure_count)
+	{
+		if (i == closest.index)
+			continue;
+		if (figure_eclipses_light(closest.pos, s.figure_list[i], s.spotlight))
+		{
+			lum_intensity = s.amb_light_ratio;
+			break ;
+		}
+	}
+	return (filter_color(color_shade(lum_intensity,
+			s.figure_list[closest.index], refl_col), s.adj_light_color));
+}
+
+int			get_refl_color(t_scene s, t_inters closest,
+							t_vect ray, t_vect start)
+{
+	int		refl_col;
+	t_vect	refl_dir;
+
+	refl_col = 0;
+	if (s.figure_list[closest.index].is_reflective > 0)
+	{
+		refl_dir = get_refl_vector(
+				s.figure_list[closest.index], closest.pos, ray, start);
+		refl_col = trace_ray(
+				refl_dir, s, add(closest.pos, scale(refl_dir, EPSILON)));
+	}
+	return (refl_col);
+}
+
+int			trace_ray(t_vect ray, t_scene s, t_point start)
+{
+	int			refl_col;
+	static int	current_recursion_depth = 0;
+	t_inters	closest;
+
 	if (++current_recursion_depth > MAX_RECURSION_DEPTH)
 	{
 		current_recursion_depth--;
 		return (0);
 	}
-	closest_distance = RENDER_DISTANCE;
-	i = -1;
-	while (++i < s.figure_count)
+	closest = get_closest(s, ray, start);
+	if (closest.distance < RENDER_DISTANCE)
 	{
-		intersection = s.figure_list[i].intersection(s.figure_list[i], ray, start);
-		if ((distance = norm(true_vect(start, intersection))) < closest_distance && distance > MIN_RENDER_DIST)
-		{
-			index = i;
-			closest_distance = distance;
-			closest_intersection = intersection;
-		}
-	}
-	if (closest_distance < RENDER_DISTANCE)
-	{
-		if (s.figure_list[index].is_reflective > 0)
-		{
-			reflected_dir = get_reflective_vector(s.figure_list[index], closest_intersection, ray, start);
-			modified_start = add(closest_intersection, scale(reflected_dir, EPSILON));
-			reflective_color = trace_ray(reflected_dir, s, modified_start);
-		}
-		lum_intensity = get_lum_intensity(s.figure_list[index], closest_intersection, s.spotlight, start);
-		lum_intensity = (1 - s.amb_light_ratio) * lum_intensity + s.amb_light_ratio;
-		i = -1;
-		while (++i < s.figure_count)
-		{
-			if (i == index)
-				continue;
-			if (figure_eclipses_light(closest_intersection, s.figure_list[i], s.spotlight))
-			{
-				lum_intensity = s.amb_light_ratio;
-				break ;
-			}
-		}
+		refl_col = get_refl_color(s, closest, ray, start);
 		current_recursion_depth--;
-		return (filter_color(color_shade(lum_intensity, s.figure_list[index], reflective_color), s.adj_light_color));
+		return (get_inter_color(s, closest, start, refl_col));
 	}
 	current_recursion_depth--;
-	return (rgb_to_int(new_color(s.amb_light_color.x, s.amb_light_color.y, s.amb_light_color.z)));
+	return (rgb_to_int(new_color(s.amb_light_color.x,
+			s.amb_light_color.y, s.amb_light_color.z)));
 }

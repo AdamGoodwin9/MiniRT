@@ -6,7 +6,7 @@
 /*   By: ede-thom <ede-thom@42.edu.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 20:17:20 by ede-thom          #+#    #+#             */
-/*   Updated: 2020/10/14 23:04:28 by ede-thom         ###   ########.fr       */
+/*   Updated: 2020/10/15 12:54:35 by ede-thom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_vect		**init_tracer(t_scene scene);
 t_vect		scale(t_vect v, float scalar);
 int			figure_eclipses_light(t_vect inter, t_figure shape, t_vect light);
 
-t_vect		get_reflective_vector(t_figure f, t_point inter,
+t_vect		get_refl_vector(t_figure f, t_point inter,
 									t_vect incident, t_point start);
 
 void		clean_exit(int status, char *msg);
