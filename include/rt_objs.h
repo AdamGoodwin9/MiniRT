@@ -6,7 +6,7 @@
 /*   By: ede-thom <ede-thom@42.edu.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 20:12:47 by ede-thom          #+#    #+#             */
-/*   Updated: 2020/10/15 18:32:14 by ede-thom         ###   ########.fr       */
+/*   Updated: 2020/10/15 20:18:00 by ede-thom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct	s_polynome
 typedef struct	s_light
 {
 	int			adj_color;
-	t_vect		color;			
+	t_vect		color;
 	t_vect		pos;
 	float		ratio;
 }				t_light;

@@ -6,7 +6,7 @@
 /*   By: ede-thom <ede-thom@42.edu.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 20:09:06 by ede-thom          #+#    #+#             */
-/*   Updated: 2020/10/15 20:02:37 by ede-thom         ###   ########.fr       */
+/*   Updated: 2020/10/15 20:18:37 by ede-thom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 t_scene	check_light(t_scene scene, t_parse_args parsed)
 {
-	float args[MAX_PARSE_FIGURE_ARGUMENTS];
+	float		args[MAX_PARSE_FIGURE_ARGUMENTS];
 	static int	i = 0;
-	//printf("here\n");
+
 	ft_memcpy(args, parsed.args, parsed.size * sizeof(float));
 	if (parsed.size != 7)
 		clean_exit(1, "Wrong number of arguments for light source.");

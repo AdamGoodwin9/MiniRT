@@ -6,7 +6,7 @@
 /*   By: ede-thom <ede-thom@42.edu.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 19:15:30 by dhorvill          #+#    #+#             */
-/*   Updated: 2020/10/15 20:08:14 by ede-thom         ###   ########.fr       */
+/*   Updated: 2020/10/15 20:20:42 by ede-thom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_inters	get_closest(t_scene s, t_vect ray, t_vect start)
 	return (closest);
 }
 
-static int			get_inter_color(t_scene s, t_inters closest,
+static int		get_inter_color(t_scene s, t_inters closest,
 							t_vect start, int light)
 {
 	float	lum_intensity;
@@ -48,24 +48,26 @@ static int			get_inter_color(t_scene s, t_inters closest,
 	{
 		if (i == closest.index)
 			continue;
-		if (figure_eclipses_light(closest.pos, s.figure_list[i], s.light_list[light].pos))
+		if (figure_eclipses_light(closest.pos,
+					s.figure_list[i], s.light_list[light].pos))
 		{
 			lum_intensity = s.amb_light_ratio;
 			break ;
 		}
 	}
 	return (filter_color(color_shade(lum_intensity,
-			s.figure_list[closest.index], closest.refl_color), s.light_list[light].adj_color));
+			s.figure_list[closest.index], closest.refl_color),
+			s.light_list[light].adj_color));
 }
 
-static int			mix_colors(t_scene s, t_inters closest, t_vect start)
+static int		mix_colors(t_scene s, t_inters closest, t_vect start)
 {
 	int		i;
-	int flag;
+	int		flag;
 	int		color;
 	t_color total;
 	t_color tmp;
-	
+
 	i = -1;
 	total = new_color(0, 0, 0);
 	flag = 0;
@@ -83,7 +85,7 @@ static int			mix_colors(t_scene s, t_inters closest, t_vect start)
 	return (rgb_to_int(total));
 }
 
-int			get_refl_color(t_scene s, t_inters closest,
+int				get_refl_color(t_scene s, t_inters closest,
 							t_vect ray, t_vect start)
 {
 	int		refl_col;
@@ -100,7 +102,7 @@ int			get_refl_color(t_scene s, t_inters closest,
 	return (refl_col);
 }
 
-int			trace_ray(t_vect ray, t_scene s, t_point start)
+int				trace_ray(t_vect ray, t_scene s, t_point start)
 {
 	static int	current_recursion_depth = 0;
 	t_inters	closest;
