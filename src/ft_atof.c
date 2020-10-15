@@ -6,7 +6,7 @@
 /*   By: ede-thom <ede-thom@42.edu.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/08 12:54:07 by ede-thom          #+#    #+#             */
-/*   Updated: 2020/10/14 21:23:49 by ede-thom         ###   ########.fr       */
+/*   Updated: 2020/10/15 14:44:21 by ede-thom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ float	ft_atof(char *nb)
 		neg = -1;
 		nb++;
 	}
-	while (*nb && *nb != '.')
+	while (*nb && *nb != '.' && ft_isdigit(*nb))
 		i = i * 10 + (*(nb++) - '0');
 	if (*nb == '.')
 		nb++;
-	while (*nb)
+	while (*nb && ft_isdigit(*nb))
 	{
 		d += (*(nb++) - '0') * mult;
 		mult *= 0.1;
