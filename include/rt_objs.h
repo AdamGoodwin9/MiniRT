@@ -101,7 +101,6 @@ typedef struct	s_inters
 	int		index;
 }				t_inters;
 
-
 typedef struct	s_drawable
 {
 	char				*name;
