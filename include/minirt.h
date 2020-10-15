@@ -6,7 +6,7 @@
 /*   By: ede-thom <ede-thom@42.edu.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 20:17:20 by ede-thom          #+#    #+#             */
-/*   Updated: 2020/10/15 12:54:35 by ede-thom         ###   ########.fr       */
+/*   Updated: 2020/10/15 14:30:20 by ede-thom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ float		get_lum_intensity(t_figure figure, t_point inter,
 
 int			trace_ray(t_vect ray, t_scene scene, t_point start);
 int			save_to_bmp(t_scene scene);
+void		write_img(t_scene scene, int cam_no, int fd);
 
 #endif

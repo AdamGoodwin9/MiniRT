@@ -6,7 +6,7 @@
 /*   By: ede-thom <ede-thom@42.edu.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 20:12:47 by ede-thom          #+#    #+#             */
-/*   Updated: 2020/10/15 13:47:09 by ede-thom         ###   ########.fr       */
+/*   Updated: 2020/10/15 14:34:49 by ede-thom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,17 @@ typedef struct	s_drawable
 	t_figure			(*create)(t_parse_args parsed);
 	struct s_drawable	*next;
 }				t_drawable;
+
+typedef struct	s_poubelle
+{
+	t_scene			scene;
+	int				h;
+	int				w;
+	int				cam_no;
+	int				fd;
+	unsigned char	*img;
+	t_color			color;
+}				t_poubelle;
 
 typedef t_figure	t_hcyl;
 typedef t_figure	t_cyl;
